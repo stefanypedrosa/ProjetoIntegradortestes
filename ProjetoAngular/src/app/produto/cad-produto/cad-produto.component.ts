@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { produto } from '../../model/produto'
+import { produto } from '../../model/produto';
+import { WebListServiceService } from '../../service/web-list-service.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-cad-produto',
   templateUrl: './cad-produto.component.html',
@@ -17,14 +20,18 @@ export class CadProdutoComponent implements OnInit {
   _msgErroD = null;
   _msgEnviar = null;
 
-  constructor() { }
+  constructor(private srv: WebListServiceService, private router: Router) { }
 
   ngOnInit() {
+    if (!localStorage.getItem("TOKEN")) {
+      alert("Você não pode acessar está página sem estar logado")
+      this.router.navigate(['/login']);
+    }
   }
 
   validacao() {
     if (this.produto.nome == "" || this.produto.linkFoto == "" || this.produto.detalhes == "" || this.produto.nome == null || this.produto.linkFoto == null || this.produto.detalhes == null) {
-      alert("Preencha este campo");
+      alert("Preencha todos os campos");
     }
 
     if(this.produto.tamanho == "Selecione"){
@@ -72,6 +79,7 @@ export class CadProdutoComponent implements OnInit {
     }
 
     if (this.produto.nome != "" && this.produto.linkFoto != "" && this.produto.detalhes != "" && this.produto.categoria != "Selecione" && this.produto.tamanho != "Selecione" && this.produto.classificacao != "Selecione" && this.produto.condicao) {
+      this.srv.inserirp(this.produto).subscribe((res)=>{
         this._msgEnviar = "Dados enviados com SUCESSO!!";
         this.produto.nome = "";
         this.produto.linkFoto = "";
@@ -80,6 +88,17 @@ export class CadProdutoComponent implements OnInit {
         this.produto.categoria = "Selecione";
         this.produto.classificacao = "Selecione";
         this.produto.condicao = "Selecione";
+      },
+      (error)=>{
+        this._msgEnviar = "Erro ao enviar dados!!";
+        this.produto.nome = "";
+        this.produto.linkFoto = "";
+        this.produto.detalhes = "";
+        this.produto.tamanho = "Selecione";
+        this.produto.categoria = "Selecione";
+        this.produto.classificacao = "Selecione";
+        this.produto.condicao = "Selecione";
+      })
     }
   }
 
