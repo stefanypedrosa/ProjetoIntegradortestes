@@ -24,9 +24,20 @@
                     <li class="nav-item active">
                         <a class="nav-link text-white" [routerLink]="'/produto'">Products</a>
                     </li>
-                    
                     <li class="nav-item">
-                        <a class="nav-link text-white" [routerLink]="'/login'">{{login}}</a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ usuario }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-white" [routerLink]="'/login'" *ngIf="!log">Login</a>
+                                <a class="nav-link text-white" [routerLink]="'/login'" (click)="logout()"
+                                    *ngIf="log">Logout</a>
+                                <a class="dropdown-item" [routerLink]="['/editausuarios',usuario.id]">Editar</a>
+                            </div>
+                        </div>
+
                     </li>
                 </ul>
                 <img id="faq" src="../../assets/faq-icon3.png" alt="FAQ" [routerLink]="'/faq'">

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { WebListServiceService } from '../service/web-list-service.service';
-import { Produto } from '../model/idproduto';
-
+import { idProduto } from '../model/idproduto';
 
 @Component({
   selector: 'app-produto',
   templateUrl: './produto.component.html',
   styleUrls: ['./produto.component.css']
 })
+
+
 export class ProdutoComponent implements OnInit {
 
-  public idbusca: string;
-  public idproduto: Produto[];
-  public _idproduto: Produto;
+  public idbusca: number;
+  public idproduto: idProduto[];
+  public _idproduto: idProduto;
   public lista: boolean;
   public _msgErro: string = null;
 
@@ -22,27 +23,25 @@ export class ProdutoComponent implements OnInit {
     this.pesquisarTodos();
   }
 
-
-
   public pesquisarTodos() {
       this._msgErro = "";
       this.lista = true
-      this.produtoBusca.obterLista().subscribe((resultado: Produto[]) => {
+      this.produtoBusca.obterLista().subscribe((resultado: idProduto[]) => {
         this.idproduto = resultado
-        this.idbusca = "";
+        this.idbusca = null;
       })
     }
 
   public pesquisar() {
-    if (this.idbusca == "") {
+    if (this.idbusca == null) {
       this._msgErro = "Digite algum termo de busca";
     }
     else {
       this._msgErro = "";
       this.lista = false
-      this.produtoBusca.obterListaPorId(this.idbusca).subscribe((resultado: Produto) => {
+      this.produtoBusca.buscaDetProd(this.idbusca).subscribe((resultado: idProduto) => {
         this._idproduto = resultado;
-        this.idbusca = "";
+        this.idbusca = null;
 
       })
     }

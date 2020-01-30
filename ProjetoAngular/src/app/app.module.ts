@@ -24,7 +24,8 @@ import { ConsultaUsuariosComponent } from './login/consulta-usuarios/consulta-us
 import { EditaUsuarioComponent } from './login/edita-usuario/edita-usuario.component';
 import { FaqComponent } from './faq/faq.component';
 import { FormFaqComponent } from './faq/form-faq/form-faq.component';
-import { CadProdutoComponent } from './produto/cad-produto/cad-produto.component'
+import { CadProdutoComponent } from './produto/cad-produto/cad-produto.component';
+import { EditaProdutoComponent } from './produto/edita-produto/edita-produto.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CadProdutoComponent } from './produto/cad-produto/cad-produto.component
     EditaUsuarioComponent,
     FaqComponent,
     FormFaqComponent,
-    CadProdutoComponent
+    CadProdutoComponent,
+    EditaProdutoComponent,
   ],
   imports: [
     BrowserModule,

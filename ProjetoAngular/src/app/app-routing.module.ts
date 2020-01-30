@@ -9,7 +9,8 @@ import {LoginComponent} from './login/login.component';
 import { ConsultaUsuariosComponent } from './login/consulta-usuarios/consulta-usuarios.component';
 import { EditaUsuarioComponent } from './login/edita-usuario/edita-usuario.component';
 import { FaqComponent } from './faq/faq.component';
-import { CadProdutoComponent } from './produto/cad-produto/cad-produto.component'
+import { EditaProdutoComponent } from './produto/edita-produto/edita-produto.component';
+import { CadProdutoComponent } from './produto/cad-produto/cad-produto.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'consultausuarios', component:ConsultaUsuariosComponent},
   {path: 'editausuarios/:id', component:EditaUsuarioComponent},
   {path: 'faq', component:FaqComponent},
-  {path: 'cadastroproduto', component:CadProdutoComponent}
+  {path: 'editaproduto/:id', component:EditaProdutoComponent},
+  {path: 'cadastroproduto', component: CadProdutoComponent}
 ];
 
 @NgModule({

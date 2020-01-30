@@ -28,6 +28,7 @@ export class ModalCadComponent implements OnInit {
   constructor(private srv: WebListServiceService) { }
 
   ngOnInit() {
+    
   }
 
   validacao(){
@@ -126,4 +127,5 @@ export class ModalCadComponent implements OnInit {
     this._msgEnviar = null;
     this._msgEnviarE = null;
   }
+
 }

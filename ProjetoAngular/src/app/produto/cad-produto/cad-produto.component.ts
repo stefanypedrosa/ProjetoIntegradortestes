@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { produto } from '../../model/produto';
 import { WebListServiceService } from '../../service/web-list-service.service';
 import { Router } from '@angular/router';
+import { idProduto } from 'src/app/model/idProduto';
 
 @Component({
   selector: 'app-cad-produto',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cad-produto.component.css']
 })
 export class CadProdutoComponent implements OnInit {
-  produto: produto = new produto();
+  produto: idProduto = new idProduto;
   private filtro: any = /^([a-zA-zà-úÀ-Ú]|\s+)+$/;
   _msgErroN = null;
   _msgErroF = null;

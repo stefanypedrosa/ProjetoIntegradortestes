@@ -20,21 +20,28 @@ export class FormLoginComponent implements OnInit {
   constructor(private srv: WebListServiceService, private router: Router) { }
 
   ngOnInit() {
-   if(localStorage.getItem("TOKEN")){
-    localStorage.removeItem("TOKEN");
-    this._msgLogout = "Usuário deslogado!";
-   }
+    if (localStorage.getItem("TOKEN")) {
+      localStorage.removeItem("TOKEN");
+      localStorage.clear();
+      Globals.nome = undefined;
+      this._msgLogout = "Usuário desconectado!";
+    }
   }
 
   autenticacao() {
+    this._msgLogout = null;
     this._msgEnviarE = null;
     if (this.usuario.email == "" || this.usuario.senha == "" || this.usuario.email == null || this.usuario.senha == null) {
       this._msgEnviarE = "Preencha todos os campos";
     }
     else {
+      //Globals.USUARIO = this.usuario;
       this.srv.login(this.usuario).subscribe((res: Token) => {
-        localStorage.setItem("TOKEN",res.token);
-        //Globals.USUARIO = res;
+        localStorage.setItem("TOKEN", res.token);
+        //localStorage.setItem("id", res.id);
+        localStorage.setItem("nome", res.nome);
+        localStorage.setItem("email", res.email);
+        this.srv.log.next(true);
         this.router.navigate(['home']);
       },
         error => {
@@ -51,5 +58,5 @@ export class FormLoginComponent implements OnInit {
     this._msgLogout = null;
   }
 
-  
+
 }
